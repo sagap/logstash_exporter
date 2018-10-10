@@ -10,6 +10,5 @@ RUN curl -fsSL -o /usr/local/bin/dep https://github.com/golang/dep/releases/down
 
 FROM busybox:1.27.2-glibc
 COPY --from=golang /go/src/github.com/sagap/logstash_exporter /
-LABEL maintainer christoffer.kylvag@bonniernews.se
-EXPOSE 9198
+EXPOSE 1234
 ENTRYPOINT ["/logstash_exporter"]  
