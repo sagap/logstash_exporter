@@ -2,3 +2,5 @@
 *~
 # Binaries
 logstash_exporter
+#Intellij
+.idea/
