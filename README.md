@@ -1,4 +1,4 @@
-# Logstash exporter  
+# Logstash exporter   [![Build Status](https://travis-ci.org/sagap/logstash_exporter.svg?branch=master)](https://travis-ci.org/sagap/logstash_exporter)
 Prometheus exporter for the metrics available in Logstash version 6.4.  
   
 ## Usage  
