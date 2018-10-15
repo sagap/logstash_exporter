@@ -6,6 +6,7 @@ import (
 	"net/http"
 )
 
+const RETRIES int = 3
 // HTTPHandler type
 type HTTPHandler struct {
 	Endpoint string
@@ -17,7 +18,6 @@ func (h *HTTPHandler) Get() (http.Response, error) {
 	if err != nil {
 		return http.Response{}, err
 	}
-
 	return *response, nil
 }
 
@@ -27,12 +27,21 @@ type HTTPHandlerInterface interface {
 }
 
 func getMetrics(h HTTPHandlerInterface, target interface{}) error {
-	response, err := h.Get()
-	if err != nil {
-		log.Errorf("Cannot retrieve metrics: %s", err)
-		return nil
+	count := 0
+	var response http.Response
+	var err error
+	for {
+		response, err = h.Get()
+		if err != nil{
+			count++
+		}else{
+			break
+		}
+		if count > 3 {
+			log.Errorf("Cannot retrieve metrics: %s", err)
+			return nil
+		}
 	}
-
 	defer func() {
 		err = response.Body.Close()
 		if err != nil {
