@@ -16,15 +16,18 @@ curl http://localhost:1234/monitoring\?monitoringPort\=123
 ```
 or configure the prometheus.yml as below:    
 ```
-  - job_name: 'logstash-testflow'  
-    metrics_path: /monitoring  
-    params:  
-            monitoringPort: [http://localhost:9600]  
-    static_configs:  
-    - targets:  
-      - localhost:1234  
+  - job_name: 'logstash-testflow'
+    metrics_path: /monitoring
+    static_configs:
+      - targets:
+        - localhost:1234
+        labels:
+          instace: 'logstash-testflow'
+    relabel_configs:
+      - source_labels: [__param_]
+        target_label: __param_monitoringPort
+        replacement: http://localhost:9600
 ```
-
   
 ### Flags  
 Flag | Description | Default  
