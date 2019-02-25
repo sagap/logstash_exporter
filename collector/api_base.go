@@ -37,7 +37,7 @@ func getMetrics(h HTTPHandlerInterface, target interface{}) error {
 		}else{
 			break
 		}
-		if count > 3 {
+		if count > RETRIES {
 			log.Errorf("Cannot retrieve metrics: %s", err)
 			return nil
 		}

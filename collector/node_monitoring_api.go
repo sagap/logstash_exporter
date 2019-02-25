@@ -24,9 +24,9 @@ type NodeMonitoringResponse struct {
 // invoking Logstash instance to get metrics
 func NodeMonitoring(endpoint string) (NodeMonitoringResponse, error) {
 	var response NodeMonitoringResponse
-	fmt.Println("Endpoint: ", endpoint)
+	//Endpoint to retrieve metrics from: "http://localhost:"+endpoint + "/_node/stats"
 	handler := &HTTPHandler{
-		Endpoint: endpoint + "/_node/stats",
+		Endpoint: fmt.Sprintf("http://localhost:%s/_node/stats", endpoint),
 	}
 	err := getMetrics(handler, &response)
 	return response, err

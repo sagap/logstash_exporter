@@ -100,7 +100,5 @@ func init() {
 func main() {
 	exporterBindAddress := flag.String("listen_port", ":1234", "Address on which to expose metrics and web interface.")
 	flag.Parse()
-	log.Infoln("Starting Logstash exporter", version.Info())
-	log.Infoln("Build context", version.BuildContext())
 	listen(*exporterBindAddress)
 }
